@@ -158,6 +158,41 @@ ALTER SEQUENCE public.planet_planet_id_seq OWNED BY public.planet.planet_id;
 
 
 --
+-- Name: planet_type; Type: TABLE; Schema: public; Owner: freecodecamp
+--
+
+CREATE TABLE public.planet_type (
+    planet_type_id integer NOT NULL,
+    name character varying(30) NOT NULL,
+    des text
+);
+
+
+ALTER TABLE public.planet_type OWNER TO freecodecamp;
+
+--
+-- Name: planet_type_planet_type_id_seq; Type: SEQUENCE; Schema: public; Owner: freecodecamp
+--
+
+CREATE SEQUENCE public.planet_type_planet_type_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.planet_type_planet_type_id_seq OWNER TO freecodecamp;
+
+--
+-- Name: planet_type_planet_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: freecodecamp
+--
+
+ALTER SEQUENCE public.planet_type_planet_type_id_seq OWNED BY public.planet_type.planet_type_id;
+
+
+--
 -- Name: star; Type: TABLE; Schema: public; Owner: freecodecamp
 --
 
@@ -213,6 +248,13 @@ ALTER TABLE ONLY public.moon ALTER COLUMN moon_id SET DEFAULT nextval('public.mo
 --
 
 ALTER TABLE ONLY public.planet ALTER COLUMN planet_id SET DEFAULT nextval('public.planet_planet_id_seq'::regclass);
+
+
+--
+-- Name: planet_type planet_type_id; Type: DEFAULT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.planet_type ALTER COLUMN planet_type_id SET DEFAULT nextval('public.planet_type_planet_type_id_seq'::regclass);
 
 
 --
@@ -279,6 +321,15 @@ INSERT INTO public.planet VALUES (12, 'p_12', NULL, NULL, NULL);
 
 
 --
+-- Data for Name: planet_type; Type: TABLE DATA; Schema: public; Owner: freecodecamp
+--
+
+INSERT INTO public.planet_type VALUES (1, 'type 1', NULL);
+INSERT INTO public.planet_type VALUES (2, 'type 2', NULL);
+INSERT INTO public.planet_type VALUES (3, 'type 3', NULL);
+
+
+--
 -- Data for Name: star; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
@@ -309,6 +360,13 @@ SELECT pg_catalog.setval('public.moon_moon_id_seq', 20, true);
 --
 
 SELECT pg_catalog.setval('public.planet_planet_id_seq', 12, true);
+
+
+--
+-- Name: planet_type_planet_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
+--
+
+SELECT pg_catalog.setval('public.planet_type_planet_type_id_seq', 3, true);
 
 
 --
@@ -364,6 +422,22 @@ ALTER TABLE ONLY public.planet
 
 ALTER TABLE ONLY public.planet
     ADD CONSTRAINT planet_pkey PRIMARY KEY (planet_id);
+
+
+--
+-- Name: planet_type planet_type_name_unique; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.planet_type
+    ADD CONSTRAINT planet_type_name_unique UNIQUE (name);
+
+
+--
+-- Name: planet_type planet_type_pkey; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.planet_type
+    ADD CONSTRAINT planet_type_pkey PRIMARY KEY (planet_type_id);
 
 
 --
